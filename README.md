@@ -14,16 +14,17 @@
 
 ## UI (illustrative) — progressive disclosure
 
-Four screens, showing the same underlying change at three levels of detail plus the dashboard that gets you there:
+Three screens, showing the same v13→v14 change at two levels of detail, plus the dashboard that gets you there:
 
 1. **Firm dashboard** — filterable by status, shows only what's pending.
 2. **Level 1 (default)** — plain-language, per-version summaries in order, each flagged as an AI-generated summary that's been reviewed, leading to the apply/decline decision.
-3. **Level 2 (optional/advanced)** — a structured old-vs-new comparison for a given version hop: field names and values, before and after, side by side. Still no code syntax — just more specific than the prose summary.
-4. **Level 3 (fallback/technical)** — the raw JSON diff, deliberately styled and framed as a separate internal support console rather than a tab in the auditor app, since it's for engineering/support debugging, not for firm users.
+3. **Level 2 (optional/advanced)** — a structured old-vs-new comparison for that same version hop: field names and values, before and after, side by side. Still no code syntax — just more specific than the prose summary.
 
-Levels 1 and 2 are both generated from the same deterministic structured diff; only Level 1's prose involves an LLM, which is also the only one of the three gated behind human review before it reaches customers.
+Both are generated from the same deterministic structured diff; only Level 1's prose involves an LLM, which is why it's the only one of the two gated behind human review before it reaches customers.
 
-![Illustrative UI — dashboard, Level 1 summary, Level 2 comparison, and Level 3 internal console](ui-wireframe.png)
+Level 3 (fallback/technical — the raw JSON diff) deliberately has **no screen here**. It's mocked up nowhere in this auditor-facing UI because it isn't part of the auditor-facing product: it's served only through a separate internal support console with its own role check, for engineering/support debugging. See the design doc's Failure Modes section, "Level 3 leaking into the auditor-facing app."
+
+![Illustrative UI — dashboard, Level 1 summary, and Level 2 comparison](ui-wireframe.png)
 
 ## Running the tests
 
